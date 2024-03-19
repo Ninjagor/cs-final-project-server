@@ -5,8 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "test": "node testing/index.js",
-    "build": "tsc",
-    "prestart": "npm run build",
+    "build-application": "tsc",
     "start": "node .",
     "dev": "nodemon --exec ts-node src/server.ts"
   },
