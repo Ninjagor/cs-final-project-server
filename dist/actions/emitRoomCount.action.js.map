@@ -1,0 +1,1 @@
+{"version":3,"file":"emitRoomCount.action.js","sourceRoot":"","sources":["../../src/actions/emitRoomCount.action.ts"],"names":[],"mappings":";;AACA,8DAA2D;AAG3D,SAAwB,aAAa,CAAC,EAAU;IAC5C,MAAM,OAAO,GAAG,+BAAc,CAAC,WAAW,EAAE,CAAC;IAC7C,EAAE,CAAC,IAAI,CAAC,YAAY,EAAE,OAAO,CAAC,GAAG,CAAC,IAAI,EAAE,YAAY,CAAC,CAAC,CAAC;AAC3D,CAAC;AAHD,gCAGC"}

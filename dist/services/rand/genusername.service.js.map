@@ -1,0 +1,1 @@
+{"version":3,"file":"genusername.service.js","sourceRoot":"","sources":["../../../src/services/rand/genusername.service.ts"],"names":[],"mappings":";;;AAAA,mEAAmG;AAEnG,SAAgB,gBAAgB;IAC5B,MAAM,YAAY,GAAW;QAC3B,YAAY,EAAE,CAAC,mCAAU,EAAE,gCAAO,CAAC;QACnC,SAAS,EAAE,GAAG;QACd,MAAM,EAAE,CAAC;KACV,CAAC;IAEF,OAAO,IAAA,6CAAoB,EAAC,YAAY,CAAW,CAAC;AACxD,CAAC;AARD,4CAQC"}
