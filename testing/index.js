@@ -1,6 +1,8 @@
 const { io } = require("socket.io-client");
 
-const socket = io("http://localhost:3000");
+const socket = io("https://cs-final-project-server-ninjagor.koyeb.app/");
+
+console.log(socket)
 
 let userId;
 
@@ -8,8 +10,8 @@ socket.on('connection_details', (details) => {
     console.log(details)
     userId = details.userid;
     changeUsername();
-    socket.emit('create_room', "cool_room");
-    // socket.emit('join_room', "cool_room")
+    // socket.emit('create_room', "cool_room");
+    socket.emit('join_room', "cool_room")
 })
 
 socket.on('error', (message) => {
