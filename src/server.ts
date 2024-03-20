@@ -6,7 +6,11 @@ import { SessionStorage } from "./storage/sessionStorage";
 
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "*"
+    }
+});
 
 const sessionStorage = SessionStorage.getInstance();
 sessionStorage.set('SS', 'user_count', 0);
