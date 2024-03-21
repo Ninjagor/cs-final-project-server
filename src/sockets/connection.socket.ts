@@ -24,7 +24,7 @@ export default function configureSocket(io: Server) {
         emitUserCount(io);
 
         socket.emit('connection_details', {
-            "userid": socket.userid,
+            "playerid": socket.userid,
             "username": socket.username
         });
 
