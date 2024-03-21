@@ -24,8 +24,9 @@ export default function configureSocket(io: Server) {
         emitUserCount(io);
 
         socket.emit('connection_details', {
-            "userid": socket.userid
-        })
+            "userid": socket.userid,
+            "username": socket.username
+        });
 
         const users: UserInterface[] = storage.get('SS', 'users');
 
