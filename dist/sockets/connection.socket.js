@@ -22,7 +22,8 @@ function configureSocket(io) {
         (0, sendMessage_1.sendGlobalChat)(io, `[system]: ${socket.username} has joined the server`);
         (0, emitUserCount_action_1.default)(io);
         socket.emit('connection_details', {
-            "userid": socket.userid
+            "userid": socket.userid,
+            "username": socket.username
         });
         const users = storage.get('SS', 'users');
         const curr_user = {

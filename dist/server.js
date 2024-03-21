@@ -10,7 +10,11 @@ const index_1 = require("./sockets/index");
 const sessionStorage_1 = require("./storage/sessionStorage");
 const PORT = process.env.PORT || 3000;
 const server = http_1.default.createServer(app_1.default);
-const io = new socket_io_1.Server(server);
+const io = new socket_io_1.Server(server, {
+    cors: {
+        origin: "*"
+    }
+});
 const sessionStorage = sessionStorage_1.SessionStorage.getInstance();
 sessionStorage.set('SS', 'user_count', 0);
 sessionStorage.set('SS', 'users', []);
