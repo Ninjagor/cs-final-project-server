@@ -20,5 +20,20 @@ export default function gameSocket(io: Server) {
             let gameDetails = storage.get('SS', 'game_details');
             socket.emit('game_details', gameDetails);
         })
+
+        socket.on('update_player', (playerid: string, details: Player) => {
+            let gameDetails: Player[] | null = storage.get('SS', 'game_details');
+            // let selected_player: Player | null = null;
+            let new_game_details = [];
+            for (const player of gameDetails) {
+                let new_player: Player = player;
+                if (player.id == playerid) {
+                    new_player = details;
+                    // selected_player = player;
+                }
+                new_game_details.push(new_player);
+            }
+            storage.set('SS', 'game_details', new_game_details);
+        })
     });
 }
