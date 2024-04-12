@@ -20,6 +20,7 @@ sessionStorage.set('SS', 'user_count', 0);
 sessionStorage.set('SS', 'users', []);
 sessionStorage.set('SS', 'room_count', 0);
 sessionStorage.set('SS', 'rooms', []);
+sessionStorage.set('SS', 'game_details', []);
 // sessionStorage.set('SS', 'io', io);
 (0, index_1.startSockets)(io);
 server.listen(PORT, () => {

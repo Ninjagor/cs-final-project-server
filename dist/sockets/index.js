@@ -31,12 +31,14 @@ const connection_socket_1 = __importDefault(require("./connection.socket"));
 const chat_socket_1 = __importStar(require("./chat.socket"));
 const user_socket_1 = __importDefault(require("./user.socket"));
 const room_socket_1 = __importDefault(require("./room.socket"));
+const game_socket_1 = __importDefault(require("./game.socket"));
 function startSockets(io) {
     (0, connection_socket_1.default)(io);
     (0, chat_socket_1.default)(io);
     (0, chat_socket_1.roomChatSocket)(io);
     (0, user_socket_1.default)(io);
     (0, room_socket_1.default)(io);
+    (0, game_socket_1.default)(io);
 }
 exports.startSockets = startSockets;
 //# sourceMappingURL=index.js.map

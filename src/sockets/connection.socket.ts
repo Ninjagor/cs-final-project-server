@@ -90,6 +90,4 @@ export default function configureSocket(io: Server) {
             emitUserCount(io);
         });
     });
-
-} 
-
+}

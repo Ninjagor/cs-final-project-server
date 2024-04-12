@@ -3,6 +3,7 @@ import configureSocket from "./connection.socket";
 import chatSocket, { roomChatSocket } from "./chat.socket";
 import userSocket from "./user.socket";
 import roomSocket from "./room.socket";
+import gameSocket from "./game.socket";
 
 export function startSockets(io: Server) {
     configureSocket(io);
@@ -10,4 +11,5 @@ export function startSockets(io: Server) {
     roomChatSocket(io);
     userSocket(io);
     roomSocket(io);
+    gameSocket(io);
 }

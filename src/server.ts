@@ -17,6 +17,7 @@ sessionStorage.set('SS', 'user_count', 0);
 sessionStorage.set('SS', 'users', []);
 sessionStorage.set('SS', 'room_count', 0);
 sessionStorage.set('SS', 'rooms', []);
+sessionStorage.set('SS', 'game_details', []);
 // sessionStorage.set('SS', 'io', io);
 
 startSockets(io);

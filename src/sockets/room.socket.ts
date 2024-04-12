@@ -54,6 +54,9 @@ export default function roomSocket(io: Server) {
                 });
                 
                 socket.join(roomname);
+                if (members.length >= 2) {
+                    io.to(roomname).emit("start_game", roomname);
+                }
                 io.to(roomname).emit("global_chat", `[system]: ${socket.username} has joined room ${roomname}`);
                 storage.set('SS', 'rooms', rooms);
                 storage.set('SS', 'users', users);
