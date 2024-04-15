@@ -12,6 +12,7 @@ function gameSocket(io) {
             gameDetails.push(new_player);
             socket.playerid = new_player.id;
             storage.set('SS', 'game_details', gameDetails);
+            socket.emit('return_player_info', new_player.id);
         });
         socket.on('get_game_details', () => {
             let gameDetails = storage.get('SS', 'game_details');
