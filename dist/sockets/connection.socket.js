@@ -11,6 +11,9 @@ const sendMessage_1 = require("../services/chat/sendMessage");
 function configureSocket(io) {
     const storage = sessionStorage_1.SessionStorage.getInstance();
     io.on('connection', (socket) => {
+        socket.on("ping", (callback) => {
+            callback();
+        });
         socket.userid = (0, genuuid_service_1.generateUuid)();
         socket.username = (0, genusername_service_1.generateUsername)();
         socket.currentroom = {

@@ -11,6 +11,10 @@ import { RoomInterface } from "../models/Room";
 export default function configureSocket(io: Server) {
     const storage = SessionStorage.getInstance();
     io.on('connection', (socket: SessionSocket) => {
+
+        socket.on("ping", (callback) => {
+            callback();
+        }) 
     
         socket.userid = generateUuid();
         socket.username = generateUsername();
