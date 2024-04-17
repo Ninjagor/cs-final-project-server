@@ -1,0 +1,86 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PlayerBuffer = void 0;
+class PlayerBuffer {
+    constructor(data) {
+        let { playerCount = 1 } = data;
+        if (playerCount > 1) {
+            playerCount = 1;
+        }
+        this.PLAYER_BIT_SIZE = 96; // 96 bits per player buffer
+        this.playerCount = playerCount;
+        this.playersBuffer = new ArrayBuffer(this.PLAYER_BIT_SIZE * this.playerCount);
+        this.playerView = new DataView(this.playersBuffer);
+        this.PLAYER_MAP = new Map();
+        this.playerIndex = 0;
+        this.BIT_BUFFER_SIZE = this.PLAYER_BIT_SIZE * this.playerCount > 0 ? this.PLAYER_BIT_SIZE * this.playerCount : 1;
+    }
+    alloc(newSize) {
+        if (newSize > 10000000) {
+            return;
+        }
+        const newBuffer = new ArrayBuffer(newSize);
+        this.playerView = new DataView(this.playersBuffer);
+        this.BIT_BUFFER_SIZE = this.PLAYER_BIT_SIZE * this.playerCount > 0 ? this.PLAYER_BIT_SIZE * this.playerCount : 1;
+    }
+    realloc(newSize) {
+        const currentSize = this.playerCount;
+        if (newSize < currentSize) {
+            const newBuffer = new ArrayBuffer(newSize);
+            const newView = new Uint8Array(newBuffer);
+            const currentView = new Uint8Array(this.playersBuffer);
+            newView.set(currentView.subarray(0, newSize));
+            this.playersBuffer = newBuffer;
+            this.playerView = new DataView(this.playersBuffer);
+        }
+        else if (newSize > currentSize) {
+            this.alloc(newSize);
+        }
+        this.BIT_BUFFER_SIZE = this.PLAYER_BIT_SIZE * this.playerCount > 0 ? this.PLAYER_BIT_SIZE * this.playerCount : 1;
+    }
+    addPlayer(player) {
+        if (this.playerIndex < this.playerCount) {
+            const offset = this.playerIndex * this.PLAYER_BIT_SIZE;
+            this.playerView.setInt16(offset, player.id, true);
+            this.playerView.setFloat32(offset + 2, player.x, true);
+            this.playerView.setFloat32(offset + 6, player.y, true);
+            this.playerView.setInt16(offset + 10, player.size, true);
+            this.PLAYER_MAP.set(player.id, this.playerIndex);
+            this.playerIndex++;
+            this.playerCount++;
+        }
+        else {
+            console.error("No available space for new player entity");
+        }
+    }
+    removePlayer(id) {
+        const index = this.PLAYER_MAP.get(id);
+        if (index !== undefined) {
+            const offset = index * this.PLAYER_BIT_SIZE;
+            this.playerView.setInt16(offset, 0, true);
+            this.playerView.setFloat32(offset + 2, 0, true);
+            this.playerView.setFloat32(offset + 6, 0, true);
+            this.playerView.setInt16(offset + 10, 0, true);
+            this.PLAYER_MAP.delete(id);
+            this.playerIndex--;
+            this.playerCount--;
+        }
+    }
+    editPlayer(id, newData) {
+        const index = this.PLAYER_MAP.get(id);
+        if (index !== undefined) {
+            const offset = index * this.PLAYER_BIT_SIZE;
+            if (newData.x !== undefined) {
+                this.playerView.setFloat32(offset + 2, newData.x, true);
+            }
+            if (newData.y !== undefined) {
+                this.playerView.setFloat32(offset + 6, newData.y, true);
+            }
+            if (newData.size !== undefined) {
+                this.playerView.setInt16(offset + 10, newData.size, true);
+            }
+        }
+    }
+}
+exports.PlayerBuffer = PlayerBuffer;
+//# sourceMappingURL=PlayerBuffer.js.map

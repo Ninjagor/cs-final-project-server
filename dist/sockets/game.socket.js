@@ -12,12 +12,21 @@ function gameSocket(io) {
             gameDetails.push(new_player);
             socket.playerid = new_player.id;
             storage.set('SS', 'game_details', gameDetails);
+            const playerBuffer = storage.get('SS', 'player_buffer');
+            playerBuffer.realloc(playerBuffer.BIT_BUFFER_SIZE + playerBuffer.PLAYER_BIT_SIZE);
+            playerBuffer.addPlayer({
+                id: new_player.id,
+                x: new_player.x,
+                y: new_player.y,
+                size: new_player.size
+            });
+            storage.set('SS', 'player_buffer', playerBuffer);
             socket.emit('return_player_info', new_player.id);
             socket.playerid = new_player.id;
         });
         socket.on('get_game_details', () => {
             let gameDetails = storage.get('SS', 'game_details');
-            socket.emit('game_details', gameDetails);
+            socket.emit('game_details', gameDetails, storage.get('SS', 'player_buffer'));
         });
         socket.on('update_player', (playerid, details) => {
             let gameDetails = storage.get('SS', 'game_details');
