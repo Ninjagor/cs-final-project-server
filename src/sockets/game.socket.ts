@@ -16,17 +16,16 @@ export default function gameSocket(io: Server) {
             socket.playerid = new_player.id;
             storage.set('SS', 'game_details', gameDetails);
 
-            const playerBuffer: PlayerBuffer = storage.get('SS', 'player_buffer');
+            // const playerBuffer: PlayerBuffer = storage.get('SS', 'player_buffer');
 
-            playerBuffer.realloc(playerBuffer.BIT_BUFFER_SIZE + playerBuffer.PLAYER_BIT_SIZE);
-            playerBuffer.addPlayer({
-                id: new_player.id,
-                x: new_player.x,
-                y: new_player.y,
-                size: new_player.size
-            });
+            // playerBuffer.addPlayer({
+            //     id: new_player.id,
+            //     x: new_player.x,
+            //     y: new_player.y,
+            //     size: new_player.size
+            // });
 
-            storage.set('SS', 'player_buffer', playerBuffer);
+            // storage.set('SS', 'player_buffer', playerBuffer);
 
             socket.emit('return_player_info', new_player.id);
             socket.playerid = new_player.id;
