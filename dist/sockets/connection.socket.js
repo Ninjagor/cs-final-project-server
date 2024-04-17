@@ -80,14 +80,9 @@ function configureSocket(io) {
             });
             storage.set('SS', 'users', filtered_users);
             if (socket.playerid) {
-                let new_game_details = [];
-                let curr_game_details = storage.get('SS', 'game_details');
-                for (const itr in curr_game_details) {
-                    if (!(curr_game_details[itr].id == socket.playerid)) {
-                        new_game_details.push(curr_game_details[itr]);
-                    }
-                }
-                storage.set('SS', "game_details", new_game_details);
+                let player_buffer = storage.get('SS', 'player_buffer');
+                player_buffer.removePlayer(socket.playerid);
+                storage.set('SS', 'player_buffer', player_buffer);
             }
             if (socket.currentroom.roomname) {
                 let roomname = socket.currentroom.roomname;

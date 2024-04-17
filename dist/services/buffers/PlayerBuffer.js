@@ -133,7 +133,7 @@ class PlayerBuffer {
     removePlayer(id) {
         const index = this.PLAYER_MAP.get(id);
         if (index !== undefined) {
-            this.players[index] = { id: 0, x: 0, y: 0, size: 0 };
+            this.players[index] = null;
             this.PLAYER_MAP.delete(id);
             this.playerIndex--;
             this.playerCount--;
