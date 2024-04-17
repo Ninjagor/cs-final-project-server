@@ -40,6 +40,13 @@ function gameSocket(io) {
                 new_game_details.push(new_player);
             }
             storage.set('SS', 'game_details', new_game_details);
+            let player_buffer = storage.get('SS', 'player_buffer');
+            player_buffer.editPlayer(playerid, {
+                x: details.x,
+                y: details.y,
+                size: details.size
+            });
+            storage.set('SS', 'player_buffer', player_buffer);
         });
     });
 }
