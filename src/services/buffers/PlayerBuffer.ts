@@ -144,13 +144,33 @@ export class PlayerBuffer {
         }
     }
 
+    // removePlayer(id: string) {
+    //     const index = this.PLAYER_MAP.get(id);
+    //     if (index !== undefined) {
+    //         this.players[index] = null;
+    //         this.PLAYER_MAP.delete(id);
+    //         this.playerIndex--;
+    //         this.playerCount--;
+    //     }
+    // }
+
     removePlayer(id: string) {
         const index = this.PLAYER_MAP.get(id);
         if (index !== undefined) {
-            this.players[index] = null;
+            this.players.splice(index, 1);
             this.PLAYER_MAP.delete(id);
-            this.playerIndex--;
+            this.updatePlayerIndices(index);
             this.playerCount--;
+            this.playerIndex--;
+        }
+    }
+    
+    private updatePlayerIndices(startIndex: number) {
+        for (let i = startIndex; i < this.players.length; i++) {
+            const player = this.players[i];
+            if (player) {
+                this.PLAYER_MAP.set(player.id, i);
+            }
         }
     }
 
