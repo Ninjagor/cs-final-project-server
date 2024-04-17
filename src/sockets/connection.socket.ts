@@ -86,9 +86,9 @@ export default function configureSocket(io: Server) {
             })
             storage.set('SS', 'users', filtered_users);
             if (socket.playerid) {
-                // let player_buffer = storage.get('SS', 'player_buffer');
-                // player_buffer.removePlayer(socket.playerid);
-                // storage.set('SS', 'player_buffer', player_buffer);
+                let player_buffer = storage.get('SS', 'player_buffer');
+                player_buffer.removePlayer(socket.playerid);
+                storage.set('SS', 'player_buffer', player_buffer);
             }
             if (socket.currentroom.roomname) {
                 let roomname = socket.currentroom.roomname;
