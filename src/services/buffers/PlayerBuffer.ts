@@ -182,4 +182,18 @@ export class PlayerBuffer {
             this.players[index] = updatedPlayer;
         }
     }
+
+    increaseSize(id: any) {
+        const index = this.PLAYER_MAP.get(id);
+        if (index !== undefined) {
+            const currentPlayer = this.players[index];
+            const newData = {
+                x: currentPlayer.x,
+                y: currentPlayer.y,
+                size: currentPlayer.size + 1
+            }
+            const updatedPlayer = { ...currentPlayer, ...newData };
+            this.players[index] = updatedPlayer;
+        }
+    }
 }

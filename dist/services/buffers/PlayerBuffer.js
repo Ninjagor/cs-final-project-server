@@ -165,6 +165,19 @@ class PlayerBuffer {
             this.players[index] = updatedPlayer;
         }
     }
+    increaseSize(id) {
+        const index = this.PLAYER_MAP.get(id);
+        if (index !== undefined) {
+            const currentPlayer = this.players[index];
+            const newData = {
+                x: currentPlayer.x,
+                y: currentPlayer.y,
+                size: currentPlayer.size + 1
+            };
+            const updatedPlayer = Object.assign(Object.assign({}, currentPlayer), newData);
+            this.players[index] = updatedPlayer;
+        }
+    }
 }
 exports.PlayerBuffer = PlayerBuffer;
 //# sourceMappingURL=PlayerBuffer.js.map

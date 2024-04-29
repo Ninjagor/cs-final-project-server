@@ -36,6 +36,20 @@ function gameSocket(io) {
             let gameDetails = storage.get('SS', 'game_details');
             socket.emit('game_details', storage.get('SS', 'player_buffer'), storage.get('SS', 'dots'));
         });
+        socket.on('eat_dot', (dot_id, player_id) => {
+            const dots = storage.get('SS', 'dots');
+            const players = storage.get('SS', 'player_buffer');
+            for (let i = 0; i < dots.length; i++) {
+                if (dots[i].id == dot_id) {
+                    dots.splice(i, i);
+                    const dot = new Dot_1.Dot();
+                    dots.push(dot);
+                }
+            }
+            players.increaseSize(player_id);
+            storage.set('SS', 'dots', dots);
+            storage.set('SS', 'player_buffer', players);
+        });
         socket.on('update_player', (playerid, details) => {
             let gameDetails = storage.get('SS', 'game_details');
             // let selected_player: Player | null = null;

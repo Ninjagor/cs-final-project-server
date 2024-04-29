@@ -46,6 +46,22 @@ export default function gameSocket(io: Server) {
             socket.emit('game_details', storage.get('SS', 'player_buffer'), storage.get('SS', 'dots'));
         })
 
+        socket.on('eat_dot', (dot_id: string, player_id: string) => {
+            const dots: Dot[] = storage.get('SS', 'dots');
+            const players: PlayerBuffer = storage.get('SS', 'player_buffer');
+
+            for (let i = 0; i < dots.length; i++) {
+                if (dots[i].id == dot_id) {
+                    dots.splice(i, i);
+                    const dot = new Dot();
+                    dots.push(dot);
+                }
+            }
+            players.increaseSize(player_id)
+            storage.set('SS', 'dots', dots);
+            storage.set('SS', 'player_buffer', players);
+        })
+
         socket.on('update_player', (playerid: string, details: Player) => {
             let gameDetails: Player[] | null = storage.get('SS', 'game_details');
             // let selected_player: Player | null = null;
