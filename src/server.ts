@@ -27,7 +27,7 @@ sessionStorage.set('SS', 'rooms', []);
 sessionStorage.set('SS', 'game_details', []);
 sessionStorage.set('SS', 'player_buffer', playerBuffer);
 const dots: Dot[] = []
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 350; i++) {
     const dot = new Dot();
     dots.push(dot);
 }

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sessionStorage_1 = require("../storage/sessionStorage");
 const Player_1 = require("../models/Player");
+const Dot_1 = require("../models/Dot");
 function gameSocket(io) {
     const storage = sessionStorage_1.SessionStorage.getInstance();
     io.on('connection', (socket) => {
@@ -22,6 +23,14 @@ function gameSocket(io) {
             storage.set('SS', 'player_buffer', playerBuffer);
             socket.emit('return_player_info', new_player.id);
             socket.playerid = new_player.id;
+        });
+        socket.on('generate_new_dots', () => {
+            const dots = [];
+            for (let i = 0; i < 350; i++) {
+                const dot = new Dot_1.Dot();
+                dots.push(dot);
+            }
+            sessionStorage.set('SS', 'dots', dots);
         });
         socket.on('get_game_details', () => {
             let gameDetails = storage.get('SS', 'game_details');

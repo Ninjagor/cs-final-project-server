@@ -3,6 +3,7 @@ import { SessionStorage } from "../storage/sessionStorage";
 import { SessionSocket } from "../models/SessionSocket";
 import { Player } from "../models/Player";
 import { PlayerBuffer } from "../services/buffers/PlayerBuffer";
+import { Dot } from "../models/Dot";
 
 export default function gameSocket(io: Server) {
     const storage = SessionStorage.getInstance();
@@ -29,6 +30,15 @@ export default function gameSocket(io: Server) {
 
             socket.emit('return_player_info', new_player.id);
             socket.playerid = new_player.id;
+        })
+
+        socket.on('generate_new_dots', () => {
+            const dots: Dot[] = []
+            for (let i = 0; i < 350; i++) {
+                const dot = new Dot();
+                dots.push(dot);
+            }
+            sessionStorage.set('SS', 'dots', dots);
         })
 
         socket.on('get_game_details', () => {
