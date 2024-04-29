@@ -25,7 +25,7 @@ function gameSocket(io) {
         });
         socket.on('get_game_details', () => {
             let gameDetails = storage.get('SS', 'game_details');
-            socket.emit('game_details', storage.get('SS', 'player_buffer'));
+            socket.emit('game_details', storage.get('SS', 'player_buffer'), storage.get('SS', 'dots'));
         });
         socket.on('update_player', (playerid, details) => {
             let gameDetails = storage.get('SS', 'game_details');

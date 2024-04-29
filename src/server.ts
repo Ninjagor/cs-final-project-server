@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import { startSockets } from "./sockets/index";
 import { SessionStorage } from "./storage/sessionStorage";
 import { PlayerBuffer } from "./services/buffers/PlayerBuffer";
+import { Dot } from "./models/Dot";
 
 const PORT = process.env.PORT || 3000;
 const server = http.createServer(app);
@@ -25,6 +26,12 @@ sessionStorage.set('SS', 'room_count', 0);
 sessionStorage.set('SS', 'rooms', []);
 sessionStorage.set('SS', 'game_details', []);
 sessionStorage.set('SS', 'player_buffer', playerBuffer);
+const dots: Dot[] = []
+for (let i = 0; i < 100; i++) {
+    const dot = new Dot();
+    dots.push(dot);
+}
+sessionStorage.set('SS', 'dots', dots);
 // sessionStorage.set('SS', 'io', io);
 
 startSockets(io);
