@@ -5,7 +5,7 @@ export class Dot {
     y: number;
     type: "food";
     id: string;
-    constructor(x: number = Math.random() * (500), y : number = Math.random() * (500), type: "food" = "food") {
+    constructor(x: number = Math.random() * (5000), y : number = Math.random() * (5000), type: "food" = "food") {
         this.x = x;
         this.y = y;
         this.type = type;

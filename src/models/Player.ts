@@ -8,7 +8,7 @@ export class Player {
     constructor(data: {
         x?: number, y?: number, length?: number, size?: number
     }) {
-        const { x = Math.random() * (500), y = Math.random() * (500), size = 2 } = data;
+        const { x = Math.random() * (5000), y = Math.random() * (5000), size = 2 } = data;
         
         this.id = uuidv4();
         this.x = x;
