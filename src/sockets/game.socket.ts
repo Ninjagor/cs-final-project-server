@@ -63,6 +63,15 @@ export default function gameSocket(io: Server) {
             players.increaseSize(player_id)
             storage.set('SS', 'dots', new_dots);
             storage.set('SS', 'player_buffer', players);
+        });
+
+        socket.on('kill_player', (killed_id: string, killer_id: string) => {
+            let player_buffer: PlayerBuffer = storage.get('SS', 'player_buffer');
+            player_buffer.removePlayer(killed_id);
+            for (let i = 0; i < 10; i++) {
+                player_buffer.increaseSize(killer_id);
+            }
+            storage.set('SS', 'player_buffer', player_buffer);
         })
 
         socket.on('update_player', (playerid: string, details: Player) => {
