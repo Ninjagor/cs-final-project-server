@@ -50,11 +50,14 @@ export default function gameSocket(io: Server) {
             const dots: Dot[] = storage.get('SS', 'dots');
             const players: PlayerBuffer = storage.get('SS', 'player_buffer');
 
+            const new_dots = [];
+
             for (let i = 0; i < dots.length; i++) {
                 if (dots[i].id == dot_id) {
-                    dots.splice(i, i);
                     const dot = new Dot();
-                    dots.push(dot);
+                    new_dots.push(dot);
+                } else {
+                    new_dots.push(dots[i]);
                 }
             }
             players.increaseSize(player_id)

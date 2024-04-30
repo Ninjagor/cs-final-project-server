@@ -39,11 +39,14 @@ function gameSocket(io) {
         socket.on('eat_dot', (dot_id, player_id) => {
             const dots = storage.get('SS', 'dots');
             const players = storage.get('SS', 'player_buffer');
+            const new_dots = [];
             for (let i = 0; i < dots.length; i++) {
                 if (dots[i].id == dot_id) {
-                    dots.splice(i, i);
                     const dot = new Dot_1.Dot();
-                    dots.push(dot);
+                    new_dots.push(dot);
+                }
+                else {
+                    new_dots.push(dots[i]);
                 }
             }
             players.increaseSize(player_id);
