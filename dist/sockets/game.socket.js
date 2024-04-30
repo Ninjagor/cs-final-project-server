@@ -50,7 +50,7 @@ function gameSocket(io) {
                 }
             }
             players.increaseSize(player_id);
-            storage.set('SS', 'dots', dots);
+            storage.set('SS', 'dots', new_dots);
             storage.set('SS', 'player_buffer', players);
         });
         socket.on('update_player', (playerid, details) => {

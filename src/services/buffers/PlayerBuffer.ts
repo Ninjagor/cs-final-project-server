@@ -190,7 +190,7 @@ export class PlayerBuffer {
             const newData = {
                 x: currentPlayer.x,
                 y: currentPlayer.y,
-                size: currentPlayer.size + 1
+                size: currentPlayer.size + 0.1
             }
             const updatedPlayer = { ...currentPlayer, ...newData };
             this.players[index] = updatedPlayer;

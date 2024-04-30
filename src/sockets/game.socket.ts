@@ -61,7 +61,7 @@ export default function gameSocket(io: Server) {
                 }
             }
             players.increaseSize(player_id)
-            storage.set('SS', 'dots', dots);
+            storage.set('SS', 'dots', new_dots);
             storage.set('SS', 'player_buffer', players);
         })
 
