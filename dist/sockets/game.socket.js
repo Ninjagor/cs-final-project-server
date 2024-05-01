@@ -6,10 +6,11 @@ const Dot_1 = require("../models/Dot");
 function gameSocket(io) {
     const storage = sessionStorage_1.SessionStorage.getInstance();
     io.on('connection', (socket) => {
-        socket.on('join_game', () => {
+        socket.on('join_game', (username) => {
             console.log("joining_game");
             let gameDetails = storage.get('SS', 'game_details');
             const new_player = new Player_1.Player({});
+            new_player.username = username;
             gameDetails.push(new_player);
             socket.playerid = new_player.id;
             storage.set('SS', 'game_details', gameDetails);
@@ -18,7 +19,8 @@ function gameSocket(io) {
                 id: new_player.id,
                 x: new_player.x,
                 y: new_player.y,
-                size: new_player.size
+                size: new_player.size,
+                username: new_player.username
             });
             storage.set('SS', 'player_buffer', playerBuffer);
             socket.emit('return_player_info', new_player.id);

@@ -9,10 +9,11 @@ export default function gameSocket(io: Server) {
     const storage = SessionStorage.getInstance();
 
     io.on('connection', (socket: SessionSocket) => {
-        socket.on('join_game', () => {
+        socket.on('join_game', (username?: string) => {
             console.log("joining_game");
             let gameDetails = storage.get('SS', 'game_details');
             const new_player = new Player({});
+            new_player.username = username;
             gameDetails.push(new_player);
             socket.playerid = new_player.id;
             storage.set('SS', 'game_details', gameDetails);
@@ -23,7 +24,8 @@ export default function gameSocket(io: Server) {
                 id: new_player.id,
                 x: new_player.x,
                 y: new_player.y,
-                size: new_player.size
+                size: new_player.size,
+                username: new_player.username
             });
 
             storage.set('SS', 'player_buffer', playerBuffer);

@@ -5,6 +5,7 @@ export class Player {
     x: number;
     y: number;
     size: number;
+    username?: string;
     constructor(data: {
         x?: number, y?: number, length?: number, size?: number
     }) {

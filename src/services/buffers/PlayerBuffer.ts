@@ -107,7 +107,7 @@
 export class PlayerBuffer {
     PLAYER_BIT_SIZE: number;
     playerCount: number;
-    players: Array<{ id: any, x: number, y: number, size: number }>;
+    players: Array<{ id: any, x: number, y: number, size: number, username?: string }>;
     PLAYER_MAP: Map<any, any>;
     playerIndex: number;
 
@@ -124,7 +124,7 @@ export class PlayerBuffer {
         this.playerIndex = 0;
     }
 
-    addPlayer(player: { id: any, x: number, y: number, size: number }) {
+    addPlayer(player: { id: any, x: number, y: number, size: number, username?: string }) {
         if (this.playerIndex < this.playerCount) {
             this.players[this.playerIndex] = player;
             this.PLAYER_MAP.set(player.id, this.playerIndex);
