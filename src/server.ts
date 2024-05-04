@@ -11,7 +11,8 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         origin: "*"
-    }
+    },
+    wsEngine: require("eiows").Server
 });
 
 const sessionStorage = SessionStorage.getInstance();

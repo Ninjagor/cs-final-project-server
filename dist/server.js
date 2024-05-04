@@ -15,7 +15,8 @@ const server = http_1.default.createServer(app_1.default);
 const io = new socket_io_1.Server(server, {
     cors: {
         origin: "*"
-    }
+    },
+    wsEngine: require("eiows").Server
 });
 const sessionStorage = sessionStorage_1.SessionStorage.getInstance();
 const playerBuffer = new PlayerBuffer_1.PlayerBuffer({
