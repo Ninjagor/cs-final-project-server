@@ -13,7 +13,11 @@ export default function configureSocket(io: Server) {
     io.on('connection', (socket: SessionSocket) => {
 
         socket.on("ping", (callback) => {
-            callback();
+            try {
+                callback();
+            } catch(error) {
+                console.log("callback not valid")
+            }
         }) 
     
         socket.userid = generateUuid();

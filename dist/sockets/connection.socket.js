@@ -12,7 +12,12 @@ function configureSocket(io) {
     const storage = sessionStorage_1.SessionStorage.getInstance();
     io.on('connection', (socket) => {
         socket.on("ping", (callback) => {
-            callback();
+            try {
+                callback();
+            }
+            catch (error) {
+                console.log("callback not valid");
+            }
         });
         socket.userid = (0, genuuid_service_1.generateUuid)();
         socket.username = (0, genusername_service_1.generateUsername)();
