@@ -10,6 +10,22 @@ class Player {
         this.y = y;
         this.size = size;
     }
+    serialize() {
+        const buffer = new ArrayBuffer(24 + (this.username ? this.username.length : 0));
+        const view = new DataView(buffer);
+        view.setFloat32(0, this.x, true); // x position
+        view.setFloat32(4, this.y, true); // y position
+        view.setFloat32(8, this.size, true); // size
+        view.setUint32(12, this.username ? this.username.length : 0, true); // username length
+        let offset = 16;
+        if (this.username) {
+            for (let i = 0; i < this.username.length; i++) {
+                view.setUint8(offset, this.username.charCodeAt(i));
+                offset++;
+            }
+        }
+        return buffer;
+    }
 }
 exports.Player = Player;
 //# sourceMappingURL=Player.js.map

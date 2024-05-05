@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sessionStorage_1 = require("../storage/sessionStorage");
 const Player_1 = require("../models/Player");
 const Dot_1 = require("../models/Dot");
+const playerSerialization_1 = require("../services/serialization/playerSerialization");
 function gameSocket(io) {
     const storage = sessionStorage_1.SessionStorage.getInstance();
     io.on('connection', (socket) => {
@@ -36,7 +37,24 @@ function gameSocket(io) {
         });
         socket.on('get_game_details', () => {
             let gameDetails = storage.get('SS', 'game_details');
-            socket.emit('game_details', storage.get('SS', 'player_buffer'), storage.get('SS', 'dots'));
+            const serialized_players = [];
+            const player_buffers = storage.get('SS', 'player_buffer');
+            // console.log(player_buffers)
+            // const playerBuffers: null = null;
+            let playerBuffers = null;
+            if (player_buffers.players) {
+                let totalLength = 0;
+                playerBuffers = player_buffers.players.map((player) => {
+                    // console.log(player)
+                    if (player) {
+                        const buffer = (0, playerSerialization_1.player_serialize)(player);
+                        // console.log('pb ', buffer, ' END!')
+                        return buffer;
+                    }
+                });
+            }
+            // console.log(playerBuffers)
+            socket.emit('game_details', storage.get('SS', 'player_buffer'), storage.get('SS', 'dots'), playerBuffers);
         });
         socket.on('eat_dot', (dot_id, player_id) => {
             const dots = storage.get('SS', 'dots');

@@ -4,6 +4,7 @@ import { SessionSocket } from "../models/SessionSocket";
 import { Player } from "../models/Player";
 import { PlayerBuffer } from "../services/buffers/PlayerBuffer";
 import { Dot } from "../models/Dot";
+import { player_serialize } from "../services/serialization/playerSerialization";
 
 export default function gameSocket(io: Server) {
     const storage = SessionStorage.getInstance();
@@ -45,7 +46,35 @@ export default function gameSocket(io: Server) {
 
         socket.on('get_game_details', () => {
             let gameDetails = storage.get('SS', 'game_details');
-            socket.emit('game_details', storage.get('SS', 'player_buffer'), storage.get('SS', 'dots'));
+            const serialized_players = [];
+            const player_buffers = storage.get('SS', 'player_buffer');
+
+            // console.log(player_buffers)
+
+            // const playerBuffers: null = null;
+
+
+            let playerBuffers = null;
+
+
+            if (player_buffers.players) {
+                let totalLength = 0;
+                playerBuffers = player_buffers.players.map((player: any) => {
+                    // console.log(player)
+                    if (player) {
+                        const buffer = player_serialize(player);
+                        // console.log('pb ', buffer, ' END!')
+                        return buffer;
+                    }
+                })
+            }
+
+
+            // console.log(playerBuffers)
+
+
+            socket.emit('game_details', storage.get('SS', 'player_buffer'), storage.get('SS', 'dots'),
+            playerBuffers);
         })
 
         socket.on('eat_dot', (dot_id: string, player_id: string) => {
