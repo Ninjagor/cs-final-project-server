@@ -6,6 +6,7 @@ export class Player {
     y: number;
     size: number;
     username?: string;
+    imageNumber: number;
     constructor(data: {
         x?: number, y?: number, length?: number, size?: number
     }) {
@@ -15,6 +16,7 @@ export class Player {
         this.x = x;
         this.y = y;
         this.size = size;
+        this.imageNumber = Math.round(Math.random() * (4));
     }
 
     serialize() {

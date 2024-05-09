@@ -9,6 +9,7 @@ class Player {
         this.x = x;
         this.y = y;
         this.size = size;
+        this.imageNumber = Math.round(Math.random() * (4));
     }
     serialize() {
         const buffer = new ArrayBuffer(24 + (this.username ? this.username.length : 0));
