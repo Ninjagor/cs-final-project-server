@@ -21,7 +21,8 @@ function gameSocket(io) {
                 x: new_player.x,
                 y: new_player.y,
                 size: new_player.size,
-                username: new_player.username
+                username: new_player.username,
+                imageNumber: new_player.imageNumber
             });
             storage.set('SS', 'player_buffer', playerBuffer);
             socket.emit('return_player_info', new_player.id);
