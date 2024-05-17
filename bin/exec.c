@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     chdir("..");
 
     system("npm install");
-    system("npm run build-application");
+    // system("npm run build-application");
     system("npm start &");
     system("ssh -R 80:localhost:3000 us.serveo.net");
 
