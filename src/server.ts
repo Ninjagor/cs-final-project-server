@@ -12,7 +12,7 @@ const io = new Server(server, {
     cors: {
         origin: "*"
     },
-    wsEngine: require("eiows").Server
+    // wsEngine: require("eiows").Server
 });
 
 const sessionStorage = SessionStorage.getInstance();
